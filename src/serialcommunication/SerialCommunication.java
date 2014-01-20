@@ -70,7 +70,7 @@ public class SerialCommunication
         }     
     }
     
-    /** */
+    /**test */
     public static class SerialReader implements Runnable
     {
         public static final String url = "jdbc:mysql://sql4.freemysqlhosting.net:3306/";
