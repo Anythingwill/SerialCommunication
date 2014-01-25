@@ -34,6 +34,8 @@ import java.sql.Statement;
 
 public class SerialCommunication
 {
+
+    Integer box;    
     
     public SerialCommunication()
     {
@@ -84,7 +86,7 @@ public class SerialCommunication
             Statement stmt = null;
             try {
                 stmt = con.createStatement();
-                stmt.execute("USE sql313628");
+                stmt.execute("USE sql427309");
                 stmt.execute("SET time_zone = '-04:00'");
             } finally {
                 if (stmt != null) {
@@ -193,7 +195,7 @@ public class SerialCommunication
     
     public static void main ( String[] args )
     {
-        String ArduinoComPort = "COM9";
+        String ArduinoComPort = "COM7";
         System.out.print("Hello World\n");
         try
         {
