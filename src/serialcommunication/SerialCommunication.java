@@ -56,7 +56,7 @@ public class SerialCommunication
             if ( commPort instanceof SerialPort )
             {
                 SerialPort serialPort = (SerialPort) commPort;
-                serialPort.setSerialPortParams(9600,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
+                serialPort.setSerialPortParams(38400,SerialPort.DATABITS_8,SerialPort.STOPBITS_1,SerialPort.PARITY_NONE);
                 
                 InputStream in = serialPort.getInputStream();
                 OutputStream out = serialPort.getOutputStream();
@@ -195,7 +195,7 @@ public class SerialCommunication
     
     public static void main ( String[] args )
     {
-        String ArduinoComPort = "COM7";
+        String ArduinoComPort = "COM8";
         System.out.print("Hello World\n");
         try
         {
