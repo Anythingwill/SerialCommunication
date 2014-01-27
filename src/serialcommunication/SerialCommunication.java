@@ -116,15 +116,20 @@ public class SerialCommunication
                 String FlowData = "";
                 String FlowDataPoint = "";                
                 String FlowDataSQL = "";
+                String DeviceID = "";
                 while ( ( len = this.in.read(buffer)) > -1 )
                 {
                     //System.out.print(new String(buffer,0,len));
                     FlowData = FlowData + new String(buffer, 0, len);
-                    if (FlowData.indexOf(',') != -1) {
+                    if (FlowData.indexOf(';') != -1) {
 //                        System.out.print(FlowData.substring(0,FlowData.indexOf(',')) + "\n");
+                        DeviceID = FlowData.substring(0,FlowData.indexOf(';'));
+                        FlowData = FlowData.substring(FlowData.indexOf(';')+1);
                         FlowDataPoint = FlowData.substring(0,FlowData.indexOf(','));
                         System.out.print(FlowDataPoint);
-                        FlowDataSQL = "Insert into Sensor1 values(" + FlowDataPoint + ", NOW())";
+                        if (DeviceID == "Kitchen Sink") {
+                            FlowDataSQL = "Insert into Sensor1 values(" + FlowDataPoint + ", NOW())";
+                        }
                         stmt = con.createStatement();
                         stmt.executeUpdate(FlowDataSQL);
                         FlowData = FlowData.substring(FlowData.indexOf(',')+1);
