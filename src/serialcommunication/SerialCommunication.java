@@ -121,17 +121,20 @@ public class SerialCommunication
                 {
                     //System.out.print(new String(buffer,0,len));
                     FlowData = FlowData + new String(buffer, 0, len);
-                    if (FlowData.indexOf(';') != -1) {
+                    if (FlowData.indexOf(',') != -1) {
 //                        System.out.print(FlowData.substring(0,FlowData.indexOf(',')) + "\n");
                         DeviceID = FlowData.substring(0,FlowData.indexOf(';'));
                         FlowData = FlowData.substring(FlowData.indexOf(';')+1);
                         FlowDataPoint = FlowData.substring(0,FlowData.indexOf(','));
                         System.out.print(FlowDataPoint);
-                        if (DeviceID == "Kitchen Sink") {
-                            FlowDataSQL = "Insert into Sensor1 values(" + FlowDataPoint + ", NOW())";
-                        }
-                        stmt = con.createStatement();
-                        stmt.executeUpdate(FlowDataSQL);
+                        System.out.print(DeviceID);
+ //                       if (DeviceID.contains("Kitchen Sink")) {
+ //                       if (DeviceID.equals("KitchenSink")) {
+                            System.out.print("GREAT JOERB");
+                            FlowDataSQL = "Insert into " + DeviceID + " values(" + FlowDataPoint + ", NOW())";
+                            stmt = con.createStatement();
+                            stmt.executeUpdate(FlowDataSQL);
+//                        }
                         FlowData = FlowData.substring(FlowData.indexOf(',')+1);
                     }
 //                    System.out.print("FlowData:" + FlowData + "\n");
@@ -200,16 +203,19 @@ public class SerialCommunication
     
     public static void main ( String[] args )
     {
-        String ArduinoComPort = "COM8";
+        String [] ArduinoComPort = {"COM10"};
         System.out.print("Hello World\n");
-        try
-        {
-            (new SerialCommunication()).connect(ArduinoComPort);
-        }
-        catch ( Exception e )
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+        for (String comPort : ArduinoComPort) {
+            System.out.print(comPort);
+            try
+            {
+                (new SerialCommunication()).connect(comPort);
+            }
+            catch ( Exception e )
+            {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
     }
 }
